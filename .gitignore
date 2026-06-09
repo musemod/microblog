@@ -1,0 +1,62 @@
+# Byte-compiled / optimizations
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.flaskenv
+
+# Environment variables
+.env
+
+# Flask specific
+instance/
+.webassets-cache
+
+# IDE & local files
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Logs & databases
+*.log
+*.sqlite
+*.db
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Your project specific files (from your list)
+2026_05_29_JS-Py_bold1.docx
+2026_05_29_JS-Py.docx
+env.py

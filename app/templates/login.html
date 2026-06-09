@@ -1,0 +1,64 @@
+
+{% extends "base.html" %} {% block content %}
+    <h1>Sign In</h1>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username(size=32) }}<br>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}<br>
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
+
+
+
+
+
+{# This template expects a form object instantiated from the LoginForm class to be given as an argument, which you can see referenced as "form." This argument will be sent by the login view function, which I still haven't written.
+
+The HTML <form> element is used as a container for the web form. The action attribute of the form is used to tell the browser the URL that should be used when submitting the information the user entered in the form.
+
+The method attribute specifies the HTTP request method that should be used when submitting the form to the server. The default is to send it with a GET request, but in almost all cases, using a POST request makes for a better user experience because requests of this type can submit the form data in the body of the request. 
+
+The novalidate attribute is used to tell the web browser to NOT apply validation to the fields in this form, which effectively leaves this task to the Flask application running in the server. Using novalidate is entirely optional, but for this first form it is important that you set it because this will allow you to test server-side validation later in this chapter.
+
+The form.hidden_tag() template argument generates a hidden field that includes a token that is used to protect the form against CSRF attacks. All you need to do to have the form protected is include this hidden field and have the SECRET_KEY variable defined in the Flask configuration. If you take care of these two things, Flask-WTF does the rest for you.
+
+A CSRF (Cross-Site Request Forgery) attack tricks an authenticated user into unknowingly executing unwanted actions on a web application, such as changing their password, updating their email, or transferring funds.
+
+How It Works
+
+Web applications frequently rely on cookies to remember that you are logged in. If you visit a malicious website while logged into another trusted site (like your bank or email provider), the malicious site can secretly instruct your browser to send a background request to the trusted site.
+
+Because your browser automatically attaches your session credentials (cookies) to any request sent to that trusted site, the server believes you explicitly intended to make the request.
+
+A Real-World Example
+
+You log into your bank account and leave the tab open.
+You click a suspicious link sent in an email, which takes you to the attacker's website.T
+he attacker's site contains a hidden form or a fake image that secretly triggers an HTTP request to your bank, instructing it to transfer money to the attacker's account.Because you are already authenticated, the bank accepts the transfer as legitimate.
+
+Common Defenses
+
+Developers protect applications from CSRF using a few key methods:
+
+Anti-CSRF Tokens: The server generates a unique, secret, and unpredictable token for the user's session. Every time the user submits a form, they must include this token. Because the attacker's site cannot predict the token, the request fails.
+
+SameSite Cookies: This cookie attribute prevents the browser from sending cookies on cross-site requests, blocking the attacker's ability to piggyback on your session.
+
+Re-Authentication: Websites often require users to type their current password again before allowing sensitive actions, such as changing login credentials or viewing billing details.
+
+-------------------------------------------------
+If you've written HTML web forms in the past, you may have found it odd that there are no HTML fields in this template. This is because the fields from the form object know how to render themselves as HTML. All I needed to do was to include {{ form.<field_name>.label }} where I wanted the field label, and {{ form.<field_name>() }} where I wanted the field. For fields that require additional HTML attributes, those can be passed as arguments. The username and password fields in this template take the size as an argument that will be added to the <input> HTML element as an attribute. This is how you can also attach CSS classes or IDs to form fields.  #}

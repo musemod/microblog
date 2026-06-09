@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+<h1>Hi, {{ user.username }}!</h1>
+{% for post in posts %}
+<div>
+  <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+</div>
+{% endfor %} {% endblock %}
+
+
+
+
+{# The template is smarter. If the view function forgets to pass a value for the title placeholder variable, then instead of showing an empty title the template will provide a default one. You can try how this conditional works by removing the title argument in the render_template() call of the view function.
+ 
+After adding base.html, now index.html can inheric base template. base.html takes care of general pg structure while index.html now takes care of content
+
+Jinja knows that when it is asked to render index.html it needs to embed it inside base.html. The two templates have matching block statements with name content, and this is how Jinja knows how to combine the two templates into one. Now if I need to create additional pages for the application, I can create them as derived templates from the same base.html template, and that is how I can have all the pages of the application sharing the same look and feel without duplication
+
+<html>
+  <head>
+    {% if title %}
+    <title>{{ title }} - Microblog</title>
+    {% else %}
+    <title>Welcome to Microblog!</title>
+    {% endif %}
+  </head>
+  <body>
+    <h1>Hi, {{ user.username }}!</h1>
+    {% for post in posts %}
+    <div>
+      <p>{{ post.author.username }} says: <b>{{ post.body }}</b></p>
+    </div>
+    {% endif %}
+  </body>
+</html>
+ #}
+
+
+
